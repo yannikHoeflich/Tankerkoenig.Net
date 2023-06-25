@@ -13,7 +13,7 @@ internal static class MockHttpHandlerCreator {
         var mockHttp = new MockHttpMessageHandler();
 
         mockHttp.When($"{TankerkoenigClient.RawUri}list.php").Respond("application/json", s_listJson);
-        mockHttp.When($"{TankerkoenigClient.RawUri}details.php").Respond("application/json", s_detailJson);
+        mockHttp.When($"{TankerkoenigClient.RawUri}detail.php").Respond("application/json", s_detailJson);
 
         return mockHttp.ToHttpClient();
     }
