@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tankerkoenig.Net", "Tankerkoenig.Net\Tankerkoenig.Net.csproj", "{BA906193-32FC-431F-A4BC-395C7E921C0E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9A4BBB40-E9FD-47D3-9C27-45DBD4524D4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{30249F87-DD65-4990-A128-CB4871BAAFEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA906193-32FC-431F-A4BC-395C7E921C0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA906193-32FC-431F-A4BC-395C7E921C0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA906193-32FC-431F-A4BC-395C7E921C0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA906193-32FC-431F-A4BC-395C7E921C0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30249F87-DD65-4990-A128-CB4871BAAFEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30249F87-DD65-4990-A128-CB4871BAAFEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30249F87-DD65-4990-A128-CB4871BAAFEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30249F87-DD65-4990-A128-CB4871BAAFEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{30249F87-DD65-4990-A128-CB4871BAAFEB} = {9A4BBB40-E9FD-47D3-9C27-45DBD4524D4A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B130EF6A-6CA7-4934-8109-6BB219AE7DA2}
+	EndGlobalSection
+EndGlobal
