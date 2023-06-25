@@ -1,22 +1,23 @@
 using RichardSzalay.MockHttp;
 using Tankerkoenig.Net;
 using Tankerkoenig.Net.Data;
+using Tankerkoenig.Net.Results;
 
 namespace UnitTests;
 public class FakeApiTest {
-    TankkoenigClient _client;
+    TankerkoenigClient _client;
     [SetUp]
     public void Setup() {
         HttpClient httpClient = MockHttpHandlerCreator.Create();
-        _client = new TankkoenigClientForTests("00000000-0000-0000-0000-000000000000", httpClient);
+        _client = new TankerkoenigClientForTests("00000000-0000-0000-0000-000000000000", httpClient);
     }
 
     [Test]
     public async Task List() {
-        var result = await _client.ListStationsAsync(21, 12);
+        Result<IReadOnlyList<Station>> result = await _client.ListStationsAsync(21, 12);
         Assert.Multiple(() => {
             Assert.That(result.TryGetError(out Exception? exception), Is.False, $"Result Not Success: {exception?.GetType()} - {exception?.Message}");
-            Assert.That(result.TryGetValue(out var value), Is.True);
+            Assert.That(result.TryGetValue(out IReadOnlyList<Station>? value), Is.True);
 
             Assert.That(value.Count, Is.EqualTo(1));
 

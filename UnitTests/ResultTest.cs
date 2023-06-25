@@ -23,7 +23,7 @@ internal class ResultTest {
 
     [Test]
     public void ExceptionErrorResult() {
-        ArgumentException argumentException = new ArgumentException("Test 123");
+        var argumentException = new ArgumentException("Test 123");
         var result = Result.Error(argumentException);
         Assert.Multiple(() => {
             Assert.That(result.Success, Is.False);
@@ -37,11 +37,13 @@ internal class ResultTest {
     public void ErrorResponseResult() {
         var result = Result.Error("Test 123");
 
-        Assert.That(result.TryToErrorResult(out Result<ErrorResponse> errorResponse), Is.True);
-        Assert.That(errorResponse.Success, Is.False);
-        Assert.That(errorResponse.TryGetError(out Exception? exception), Is.True);
-        Assert.That(exception is TextException, Is.True);
-        Assert.That(exception.Message, Is.EqualTo("Test 123"));
+        Assert.Multiple(() => {
+            Assert.That(result.TryToErrorResult(out Result<ErrorResponse> errorResponse), Is.True);
+            Assert.That(errorResponse.Success, Is.False);
+            Assert.That(errorResponse.TryGetError(out Exception? exception), Is.True);
+            Assert.That(exception is TextException, Is.True);
+            Assert.That(exception.Message, Is.EqualTo("Test 123"));
+        });
     }
 
     [Test]

@@ -1,12 +1,10 @@
 ﻿namespace Tankerkoenig.Net.Results;
-public struct Result<T>{
+public readonly struct Result<T>{
     private readonly T? _value;
     private readonly Exception? _error;
     public bool Success { get; }
 
-    public static implicit operator Result<T>(Result<ErrorResponse> result) {
-        return new Result<T>(result._error);
-    }
+    public static implicit operator Result<T>(Result<ErrorResponse> result) => new(result._error);
 
     internal Result(T value) {
         Success = true;
@@ -18,7 +16,7 @@ public struct Result<T>{
         _error = error;
     }
 
-    public T GetValueOrThrow() {
+    public T? GetValueOrThrow() {
         return Success
             ? _value
             : throw _error;

@@ -13,11 +13,11 @@ internal abstract class BaseApiResponse {
     public bool Ok { get; set; }
 
     [JsonPropertyName("license")]
-    public string License { get; set; }
-
+    public string? License { get; set; }
+                 
     [JsonPropertyName("data")]
-    public string Data { get; set; }
-
+    public string? Data { get; set; }
+                 
     [JsonPropertyName("status")]
-    public string Status { get; set; }
+    public string? Status { get; set; }
 }

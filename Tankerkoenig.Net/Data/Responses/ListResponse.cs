@@ -9,5 +9,5 @@ using System;
 namespace Tankerkoenig.Net.Data.Responses;
 internal class ListResponse: BaseApiResponse {
     [JsonPropertyName("stations")]
-    public IReadOnlyList<Station> Stations { get; set; }
+    public IReadOnlyList<Station>? Stations { get; set; }
 }

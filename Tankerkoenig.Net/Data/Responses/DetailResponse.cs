@@ -9,5 +9,5 @@ using System;
 namespace Tankerkoenig.Net.Data.Responses;
 internal class DetailResponse : BaseApiResponse {
     [property: JsonPropertyName("station")]
-    public DetailedStation Station { get; set; }
+    public DetailedStation? Station { get; set; }
 }

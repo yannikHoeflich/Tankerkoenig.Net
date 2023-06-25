@@ -8,14 +8,14 @@ using Tankerkoenig.Net.Data.Responses;
 using Tankerkoenig.Net.Results;
 
 namespace Tankerkoenig.Net;
-public class TankkoenigClient {
+public class TankerkoenigClient {
     public const string RawUri = "https://creativecommons.tankerkoenig.de/json/";
 
     protected HttpClient _httpClient;
 
     private readonly string _apiKey;
 
-    public TankkoenigClient(string apiKey) {
+    public TankerkoenigClient(string apiKey) {
         _apiKey = apiKey;
         _httpClient = CreateHttpClient();
     }
@@ -65,11 +65,9 @@ public class TankkoenigClient {
             return errorResult;
         }
 
-        if (!requestResult.TryGetValue(out ListResponse? response) || response is null) {
-            return Result.Error("Unknown error");
-        }
-
-        return Result.Ok(response.Stations);
+        return requestResult.TryGetValue(out ListResponse? response) && response is not null && response.Stations is not null
+            ? Result.Ok(response.Stations)
+            : (Result<IReadOnlyList<Station>>)Result.Error("Unknown error");
     }
 
     public async Task<Result<DetailedStation>> GetStationAsync(Guid stationId) {
@@ -82,11 +80,9 @@ public class TankkoenigClient {
             return errorResult;
         }
 
-        if (!requestResult.TryGetValue(out DetailResponse? response) || response is null) {
-            return Result.Error("Unknown error");
-        }
-
-        return Result.Ok(response.Station);
+        return requestResult.TryGetValue(out DetailResponse? response) && response is not null && response.Station is not null
+            ? Result.Ok(response.Station)
+            : (Result<DetailedStation>)Result.Error("Unknown error");
     }
 
     private string BuildUri(string path, Dictionary<string, string> query) {
@@ -107,7 +103,7 @@ public class TankkoenigClient {
         return uriBuilder.ToString();
     }
 
-    private static HttpClient CreateHttpClient() => new HttpClient() {
+    private static HttpClient CreateHttpClient() => new() {
             BaseAddress = new Uri(RawUri)
         };
 }
