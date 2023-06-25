@@ -5,7 +5,7 @@ With this API Wrapper you can request nearby gas stations and their prices.
 
 ## Installation
 ### NuGet
-[Tankkoenig.NET](https://www.nuget.org/packages/TankkoenigNET/)
+[Tankkoenig.NET](https://www.nuget.org/packages/TankerkoenigNet/)
 You can install the library either though visual studio in the NuGet explorer.
 Alternatively you can install it through command line
 
