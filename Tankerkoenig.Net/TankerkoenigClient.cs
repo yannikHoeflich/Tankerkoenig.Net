@@ -31,7 +31,7 @@ public class TankerkoenigClient {
         }
 
         if (!response.IsSuccessStatusCode) {
-            return Result.Error(await response.Content.ReadAsStringAsync());
+            return Result.Error($"status code: {response.StatusCode} content: {await response.Content.ReadAsStringAsync()}");
         }
 
         T? responseObject;
@@ -52,11 +52,11 @@ public class TankerkoenigClient {
         return Result.Ok(responseObject);
     }
 
-    public async Task<Result<IReadOnlyList<Station>>> ListStationsAsync(double lat, double lon) {
+    public async Task<Result<IReadOnlyList<Station>>> ListStationsAsync(double lat, double lon, int radius) {
         var query = new Dictionary<string, string>() {
             {"lat", lat.ToString(CultureInfo.InvariantCulture)},
             {"lng", lon.ToString(CultureInfo.InvariantCulture)},
-            {"rad", "4" },
+            {"rad", radius.ToString(CultureInfo.InvariantCulture) },
             {"type", "all" }
         };
 

@@ -28,7 +28,7 @@ var client = new TankkoenigClientForTests("[YOUR API KEY]", httpClient);
 
 Get nearby gas stations
 ```cs
-var stations = await client.ListStationsAsync(21, 12); // your lat and lng for the '21' and '12'
+var stations = await client.ListStationsAsync(21, 12, 5); // client.ListStationsAsync([your lat], [your lon], [radius])
 ```
 
 Get data for specific gas stations
