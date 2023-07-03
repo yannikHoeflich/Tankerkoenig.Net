@@ -10,7 +10,7 @@ You can install the library either though visual studio in the NuGet explorer.
 Alternatively you can install it through command line
 
 ```sh
-dotnet add package Discord.Net --version 3.10.0
+dotnet add package TankerkoenigNet
 ```
 
 ## Getting started
