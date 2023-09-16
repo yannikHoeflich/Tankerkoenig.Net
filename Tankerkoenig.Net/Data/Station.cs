@@ -16,9 +16,9 @@ public record Station(
     [property: JsonPropertyName("lat")] double Lat,
     [property: JsonPropertyName("lng")] double Lng,
     [property: JsonPropertyName("dist")] double Dist,
-    [property: JsonPropertyName("diesel")] double Diesel,
-    [property: JsonPropertyName("e5")] double E5,
-    [property: JsonPropertyName("e10")] double E10,
+    [property: JsonPropertyName("diesel")] double? Diesel,
+    [property: JsonPropertyName("e5")] double? E5,
+    [property: JsonPropertyName("e10")] double? E10,
     [property: JsonPropertyName("isOpen")] bool IsOpen,
     [property: JsonPropertyName("houseNumber")] string HouseNumber,
     [property: JsonPropertyName("postCode")] int PostCode
