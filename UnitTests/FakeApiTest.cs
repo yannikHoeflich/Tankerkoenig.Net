@@ -9,7 +9,7 @@ public class FakeApiTest {
     [SetUp]
     public void Setup() {
         HttpClient httpClient = MockHttpHandlerCreator.Create();
-        _client = new TankerkoenigClientForTests("00000000-0000-0000-0000-000000000000", httpClient);
+        _client = new TankerkoenigClient("00000000-0000-0000-0000-000000000000", httpClient);
     }
 
     [Test]

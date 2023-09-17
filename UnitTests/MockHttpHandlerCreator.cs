@@ -9,13 +9,18 @@ using Tankerkoenig.Net;
 
 namespace UnitTests;
 internal static class MockHttpHandlerCreator {
+    private const string s_rawUri = "https://creativecommons.tankerkoenig.de/json/";
+
     public static HttpClient Create() {
         var mockHttp = new MockHttpMessageHandler();
 
-        mockHttp.When($"{TankerkoenigClient.RawUri}list.php").Respond("application/json", s_listJson);
-        mockHttp.When($"{TankerkoenigClient.RawUri}detail.php").Respond("application/json", s_detailJson);
+        mockHttp.When($"{s_rawUri}list.php").Respond("application/json", s_listJson);
+        mockHttp.When($"{s_rawUri}detail.php").Respond("application/json", s_detailJson);
 
-        return mockHttp.ToHttpClient();
+        var httpClient = mockHttp.ToHttpClient();
+        httpClient.BaseAddress = new Uri(s_rawUri);
+
+        return httpClient;
     }
 
     private const string s_listJson = """
