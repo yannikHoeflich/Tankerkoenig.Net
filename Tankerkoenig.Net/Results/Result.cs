@@ -16,7 +16,7 @@ public readonly struct Result<T>{
         _error = error;
     }
 
-    public T? GetValueOrThrow() {
+    public T GetValueOrThrow() {
         return Success
             ? _value
             : throw _error;

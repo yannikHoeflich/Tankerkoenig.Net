@@ -9,15 +9,17 @@ using Tankerkoenig.Net.Results;
 
 namespace Tankerkoenig.Net;
 public class TankerkoenigClient {
-    public const string RawUri = "https://creativecommons.tankerkoenig.de/json/";
+    protected const string s_rawUri = "https://creativecommons.tankerkoenig.de/json/";
 
     protected HttpClient _httpClient;
 
     private readonly string _apiKey;
 
-    public TankerkoenigClient(string apiKey) {
+    public TankerkoenigClient(string apiKey) : this(apiKey, CreateHttpClient()) { }
+
+    public TankerkoenigClient(string apiKey, HttpClient httpClient) {
         _apiKey = apiKey;
-        _httpClient = CreateHttpClient();
+        _httpClient = httpClient;
     }
 
     private async Task<Result<T>> RequestAsync<T>(string path, Dictionary<string, string> query) where T : BaseApiResponse {
@@ -52,16 +54,25 @@ public class TankerkoenigClient {
         return Result.Ok(responseObject);
     }
 
-    public async Task<Result<IReadOnlyList<Station>>> ListStationsAsync(double lat, double lon, int radius) {
+
+
+    public Task<Result<IReadOnlyList<Station>>> ListStationsAsync(double lat, double lon, int radius) => ListStationsAsync(lat, lon, radius, GasType.All);
+
+    public async Task<Result<IReadOnlyList<Station>>> ListStationsAsync(double lat, double lon, int radius, GasType gasType) {
+        Result<string> gasTypeStringResult = GetGasTypeString(gasType);
+        if (gasTypeStringResult.TryToErrorResult(out Result<ErrorResponse> errorResult)) {
+            return errorResult;
+        }
+
         var query = new Dictionary<string, string>() {
             {"lat", lat.ToString(CultureInfo.InvariantCulture)},
             {"lng", lon.ToString(CultureInfo.InvariantCulture)},
             {"rad", radius.ToString(CultureInfo.InvariantCulture) },
-            {"type", "all" }
+            {"type", gasTypeStringResult.GetValueOrThrow() }
         };
 
         Result<ListResponse> requestResult = await RequestAsync<ListResponse>("list.php", query);
-        if (requestResult.TryToErrorResult(out Result<ErrorResponse> errorResult)) {
+        if (requestResult.TryToErrorResult(out errorResult)) {
             return errorResult;
         }
 
@@ -104,6 +115,16 @@ public class TankerkoenigClient {
     }
 
     private static HttpClient CreateHttpClient() => new() {
-            BaseAddress = new Uri(RawUri)
+        BaseAddress = new Uri(s_rawUri)
+    };
+
+    private static Result<string> GetGasTypeString(GasType gasType) {
+        return gasType switch {
+            GasType.All => Result.Ok("all"),
+            GasType.Diesel => Result.Ok("diesel"),
+            GasType.E5 => Result.Ok("e5"),
+            GasType.E10 => Result.Ok("e10"),
+            _ => (Result<string>)Result.Error("Invalid gasType"),
         };
+    }
 }
