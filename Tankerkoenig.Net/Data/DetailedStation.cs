@@ -19,9 +19,9 @@ public record DetailedStation(
    [property: JsonPropertyName("overrides")] IReadOnlyList<object> Overrides,
    [property: JsonPropertyName("wholeDay")] bool WholeDay,
    [property: JsonPropertyName("isOpen")] bool IsOpen,
-   [property: JsonPropertyName("e5")] double E5,
-   [property: JsonPropertyName("e10")] double E10,
-   [property: JsonPropertyName("diesel")] double Diesel,
+   [property: JsonPropertyName("e5")] double? E5,
+   [property: JsonPropertyName("e10")] double? E10,
+   [property: JsonPropertyName("diesel")] double? Diesel,
    [property: JsonPropertyName("lat")] double Lat,
    [property: JsonPropertyName("lng")] double Lng,
    [property: JsonPropertyName("state")] object? State
