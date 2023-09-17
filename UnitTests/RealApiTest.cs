@@ -10,7 +10,7 @@ using Tankerkoenig.Net.Results;
 
 namespace UnitTests;
 internal class RealApiTest {
-    /*private TankerkoenigClient _client;
+    private TankerkoenigClient _client;
 
     [SetUp]
     public void Init() {
@@ -81,5 +81,5 @@ internal class RealApiTest {
         }
 
         return null;
-    }*/
+    }
 }
